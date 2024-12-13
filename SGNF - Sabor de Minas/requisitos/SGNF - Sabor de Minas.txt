@@ -1,0 +1,151 @@
+﻿Sistema para cadastrar notas fiscais, tanto pagas quanto não pagas, com controle detalhado sobre o status de pagamento:
+1. Requisitos Funcionais
+Esses são os recursos específicos para um sistema de cadastro de notas fiscais:
+Cadastro de Notas Fiscais
+* Número da nota fiscal: Identificador único da nota.
+* Data de emissão: Data em que a nota fiscal foi emitida.
+* Fornecedor: Nome do fornecedor ou empresa que emitiu a nota.
+* Valor total: O valor total da nota fiscal.
+* Categoria: A categoria da despesa (ex.: serviços, materiais, impostos).
+* Data de vencimento: Data limite para pagamento (se aplicável).
+* Status de pagamento: Indicação se a nota já foi paga ou está pendente (ex.: pendente, pago).
+* Forma de pagamento: Como a nota foi ou será paga (ex.: transferência bancária, cartão de crédito, boleto).
+* Data de pagamento: Quando a nota foi paga (se já tiver sido).
+* Observações: Detalhes extras sobre a nota fiscal.
+Controle de Status de Pagamento
+* Notas Pagas: O sistema deve permitir marcar uma nota fiscal como paga, incluindo a data e forma de pagamento.
+* Notas Pendentes: O sistema deve mostrar as notas que estão aguardando pagamento e permitir a alteração do status quando a conta for paga.
+Visualização de Notas
+* Listagem de Notas Fiscais: Exibir todas as notas cadastradas com filtros para:
+   * Status (pendente, paga)
+   * Data de vencimento
+   * Fornecedor
+   * Categoria
+   * Valor
+* Relatórios: Gerar relatórios detalhados sobre:
+   * Notas pagas e não pagas.
+   * Notas por categoria, fornecedor ou status.
+   * Total de gastos em determinado período ou com determinado fornecedor.
+Notificações
+* Alertas de Vencimento: O sistema pode enviar alertas para notas fiscais que estão perto do vencimento.
+Edição e Exclusão
+* O sistema deve permitir a edição ou exclusão de notas fiscais, caso haja necessidade de correção.
+Segurança
+* Controle de Acesso: Dependendo dos usuários, pode haver diferentes permissões (admin, usuário comum), com direito a editar, visualizar ou excluir notas.
+________________
+
+
+2. Modelo de Banco de Dados
+Aqui está uma sugestão de estrutura de banco de dados para gerenciar notas fiscais:
+Tabela: Notas Fiscais
+Campo
+	Tipo
+	Descrição
+	id
+	INT
+	Identificador único da nota fiscal
+	numero_nota
+	VARCHAR(50)
+	Número da nota fiscal
+	data_emissao
+	DATE
+	Data de emissão da nota fiscal
+	fornecedor
+	VARCHAR(100)
+	Nome do fornecedor
+	valor_total
+	DECIMAL(10, 2)
+	Valor total da nota fiscal
+	categoria
+	VARCHAR(100)
+	Categoria da despesa (ex.: serviços, impostos)
+	data_vencimento
+	DATE
+	Data de vencimento
+	status_pagamento
+	ENUM('pendente', 'pago')
+	Status do pagamento (pendente ou pago)
+	data_pagamento
+	DATE
+	Data de pagamento (se pago)
+	forma_pagamento
+	VARCHAR(50)
+	Forma de pagamento (ex.: transferência, boleto)
+	observacoes
+	TEXT
+	Observações adicionais
+	Tabela: Usuários (se necessário)
+Campo
+	Tipo
+	Descrição
+	id
+	INT
+	Identificador único do usuário
+	nome
+	VARCHAR(100)
+	Nome completo do usuário
+	email
+	VARCHAR(100)
+	Email do usuário
+	senha
+	VARCHAR(255)
+	Senha do usuário (criptografada)
+	permissao
+	ENUM('admin', 'usuario')
+	Permissão de acesso (admin, usuário comum)
+	________________
+
+
+3. Fluxo de Cadastro e Acompanhamento de Notas Fiscais
+Aqui está um fluxo básico de operação:
+1. Cadastro de Nota Fiscal:
+
+   * O usuário entra no sistema e acessa a opção de cadastro de nota fiscal.
+   * Preenche os campos obrigatórios: número da nota, fornecedor, valor total, categoria, data de vencimento e outras informações.
+   * O sistema armazena esses dados no banco de dados e define o status da nota como "pendente" inicialmente.
+   2. Alteração do Status de Pagamento:
+
+      * Quando a nota for paga, o usuário acessa a nota na lista e marca o status como "pago".
+      * O sistema solicita a data de pagamento e a forma de pagamento utilizada.
+      * A nota é atualizada no banco de dados e a data de pagamento é registrada.
+      3. Visualização e Relatórios:
+
+         * O usuário pode visualizar as notas fiscais de maneira geral (com filtros por status, data de vencimento, fornecedor, etc.).
+         * Relatórios podem ser gerados para exibir totais por fornecedor, por categoria ou status de pagamento.
+         4. Alertas e Notificações:
+
+            * O sistema envia alertas automáticos quando a data de vencimento das notas se aproxima, ajudando a garantir que o pagamento seja realizado em dia.
+________________
+
+
+4. Tecnologias e Ferramentas
+            * Backend: Pode-se usar uma API RESTful para gerenciar as operações (cadastro, edição, alteração de status). Algumas opções populares incluem:
+
+               * Node.js com Express
+               * Python com Django ou Flask
+               * Java com Spring Boot
+               * Frontend: A interface pode ser feita com HTML, CSS e JavaScript, utilizando frameworks como:
+
+                  * React ou Vue.js para interatividade.
+                  * Bootstrap para design responsivo.
+                  * Banco de Dados:
+
+                     * MySQL ou PostgreSQL são ideais para dados estruturados como notas fiscais e pagamentos.
+________________
+
+
+5. Funcionalidades Adicionais
+                     * Integração Bancária: Se você quiser integrar com bancos para importar dados de pagamentos ou gerar boletos automaticamente, essa funcionalidade pode ser adicionada no futuro.
+                     * Armazenamento de Arquivos: Para anexar cópias digitais das notas fiscais (imagens ou PDFs), você pode adicionar um campo de upload de arquivo.
+________________
+
+
+6. Exemplo de Fluxo de Cadastro de Nota Fiscal
+                     * O usuário entra no sistema e escolhe "Cadastrar Nota Fiscal".
+                     * Preenche os campos necessários: número da nota, fornecedor, valor, categoria, data de vencimento, etc.
+                     * A nota fiscal é registrada como "pendente" no banco de dados.
+                     * Quando o pagamento for realizado, o usuário marca a nota como "paga", insere a data de pagamento e a forma de pagamento.
+________________
+
+
+Este sistema pode ser ampliado para incluir funcionalidades mais avançadas, como integração com sistemas de ERP, controle de vencimentos automáticos e até mesmo alertas via e-mail ou SMS.

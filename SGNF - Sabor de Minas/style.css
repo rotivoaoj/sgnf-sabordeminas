@@ -1,0 +1,142 @@
+@import url('https://fonts.googleapis.com/css2?family=Arsenal:ital,wght@0,400;0,700;1,400;1,700&family=Caveat:wght@400..700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:ital,wght@0,100..900;1,100..900&family=Reenie+Beanie&family=Rock+Salt&family=Shadows+Into+Light&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: #dfdfdf;
+    background-image: url(imagens/fundo-abstrato.jpg);
+    background-size: cover;
+}
+
+.login-box{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    width: 380px;
+    height: 410px;
+    padding: 30px;
+    background-color: rgba(255, 0, 0, 0.808);
+    border-radius: 40px;
+    color: white;
+}
+
+.login-header{
+    text-align: center;
+    margin: 20px 0 40px 0;
+}
+
+.login-header header{
+    color: #333;
+    font-size: 30px;
+    font-weight: 600;
+}
+
+#rest{
+    color:#333;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+/*caixas de texto do login*/
+.input-box .input-field{
+    width: 100%;
+    height: 30px;
+    font-size: 14px;
+    padding: 0 25px;
+    margin-bottom: 15px;
+    border-radius: 30px;
+    border: none;
+    box-shadow: 0px 5px 10px 1px rgb(0,0,0 0.05);
+    outline: none;
+    transition: .3s;   
+}
+
+::placeholder{
+    font-weight: 400;
+    color: #808080c5;
+}
+
+.input-field:focus{
+    width: 105%;
+}
+
+.forgot{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 40px;
+}
+
+section{
+    display: flex;
+    align-items: center;
+    font-size: 12px;
+    color: #fff;
+}
+
+#check{
+    margin-right: 10px;
+}
+
+a{
+    text-decoration: none;
+    font-weight: 400;
+}
+
+a:hover{
+    text-decoration: underline;
+}
+
+section a{
+    color: #ffffff;
+    font-weight: 500;
+}
+
+.input-submit{
+    position: relative;
+}
+
+.submit-btn{
+    width: 100%;
+    height: 60px;
+    background: #7c7c7c;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: .3s;
+}
+
+.input-submit label{
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    color: #fff;
+    -webkit-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    cursor: pointer;
+}
+
+.submit-btn:hover{
+    background: #333;
+    transform: scale(1.05, 1);
+}
+
+.sign-up-link{
+    text-align: center;
+    font-size: 12px;
+    margin-top: 20px;
+}
+
+.sign-up-link a{
+    font-weight: 600;
+    color: #ffffff
+}
