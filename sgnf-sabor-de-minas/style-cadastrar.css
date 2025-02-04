@@ -7,11 +7,6 @@
     font-family: 'Poppins', sans-serif;
 }
 
-body{
-    background-image: url(imagens/fundo-abstrato.jpg);
-    background-size: cover;
-}
-
 .dp-menu ul{
     list-style: none;
     padding: 0;
@@ -62,6 +57,11 @@ body{
     float: right;
 }
 
+body{
+    background-image: url(imagens/fundo-abstrato.jpg);
+    background-size: cover;
+}
+
 footer{
     display: flex;
     font-size: 10px;
@@ -73,68 +73,29 @@ footer{
     color: #fff;
 }
 
-.logo{
-    margin-top: 40px;
-    float: right;
-}
-
-h2 {
+h3{
     font-family: 'Poppins', sans-serif;
-    font-size: 20px;
+    font-size: 32px;
     font-weight: normal;
-    color: black;
-    padding: 10px;
 }
 
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 40px;
-    padding: 2px;
-}
-
-th, td {
-    border: 0px;
-    padding: 8px;
+a {
+    display: block;
     text-align: center;
-    font-family: 'Poppins', sans-serif;
-    font-weight: normal;
-    font-size: 14px;
-}
-
-th {
-    background-color: #aaaaaa;
-    border-radius: 10px;
-}
-
-button {
-    background-color: #ff0000;
-    color: #fff;
-    border: 0px;
-    padding: 3px 8px;
-    border-radius: 3px;
-    cursor: pointer;
-    align-items: center;
-    float: right;
-    margin-top: 10px;
-    margin-right: 10px;
-}
-
-.editar {
-    background-color: #4CAF50;
-    border-radius: 10px;
-    padding: 3px;
-    color: #fff;
-}
-
-.excluir {
-    background-color: #f44336;
-    border-radius: 10px;
-    padding: 3px;
-    color: #fff;
-}
-
-.cad {
-    background-color: #ff0000;
+    margin-top: 20px;
     text-decoration: none;
+    color: #4CAF50;
+}
+
+input[type=text] {
+    width: 80%;
+    padding: 8px 12px;
+    margin: 8px 0px;
+    box-sizing: border-box;
+    border: none;
+    border-bottom: 2px solid black;
+}
+
+.form {
+    position: center;
 }

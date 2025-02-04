@@ -9,6 +9,7 @@
 
 
 <body>
+    
     <nav class="dp-menu">
         <ul>
             <li><a href="entrar.html">Início</a></li>
@@ -26,72 +27,88 @@
             
             <li><a href="#">Notificações &#x25BE</a></li>
         </ul>
-     </nav> 
+    </nav>
 
-     <div class="pesquisa">
-        <thead id="search">
-            <tr>
-                <td><input type="search" placeholder="Procurar..."></td>
-            </tr>
-        </thead>
-     </div>
+    <a  id="cad" href="cadastrar.html">
+        <button>Cadastrar Nota</button>
+    </a>
+        <h2>Lista de Notas Fiscais</h2>
+        
 
-     <table border="2">
-        <thead>
-            <tr>
-                <th>Número NF</th>
-                <th>Data Emissão</th>
-                <th>Fornecedor</th>
-                <th>Valor Total</th>
-                <th>Data Vencimento</th>
-                <th>Status PG</th>
-                <th>Tipo PG</th>
-                <th>Data PG</th>
-                <th>Observações</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td><input type="number" placeholder="Digite aqui"></td>
-                <td><input type="date" placeholder="Digite aqui"></td>
-                <td><input type="text" placeholder="Digite aqui"></td>
-                <td><input type="number" placeholder="Digite aqui"></td>
-                <td><input type="date" placeholder="Digite aqui"></td>
-                <td><input type="text" placeholder="Digite aqui"></td>
-                <td><input type="text" placeholder="Digite aqui"></td>
-                <td><input type="date" placeholder="Digite aqui"></td>
-                <td><input type="text" placeholder="Digite aqui"></td>
-            </tr>
-            <tr>
-                <td><input type="number" placeholder="Digite aqui"></td>
-                <td><input type="date" placeholder="Digite aqui"></td>
-                <td><input type="text" placeholder="Digite aqui"></td>
-                <td><input type="number" placeholder="Digite aqui"></td>
-                <td><input type="date" placeholder="Digite aqui"></td>
-                <td><input type="text" placeholder="Digite aqui"></td>
-                <td><input type="text" placeholder="Digite aqui"></td>
-                <td><input type="date" placeholder="Digite aqui"></td>
-                <td><input type="text" placeholder="Digite aqui"></td>
-            </tr>
-            <tr>
-                <td><input type="number" placeholder="Digite aqui"></td>
-                <td><input type="date" placeholder="Digite aqui"></td>
-                <td><input type="text" placeholder="Digite aqui"></td>
-                <td><input type="number" placeholder="Digite aqui"></td>
-                <td><input type="date" placeholder="Digite aqui"></td>
-                <td><input type="text" placeholder="Digite aqui"></td>
-                <td><input type="text" placeholder="Digite aqui"></td>
-                <td><input type="date" placeholder="Digite aqui"></td>
-                <td><input type="text" placeholder="Digite aqui"></td>
-            </tr>
-        </tbody>
-        <tfoot>
-            <tr>
-                <button class="save">Salvar</button>
-            </tr>
-        </tfoot>
-     </table>
+        <table id="tabelaNotas">
+            <thead>
+                <tr>
+                    <th>Número NF</th>
+                    <th>Valor</th>
+                    <th>Data de Emissão</th>
+                    <th>Data de Vencimento</th>
+                    <th>Tipo de Pagamento</th>
+                    <th>Status</th>
+                    <th>Fornecedor</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Notas Fiscais serão carregadas aqui -->
+            </tbody>
+        </table>
 
+     <script>
+        const tabela = document.getElementById('tabelaNotas').getElementsByTagName('tbody')[0];
+
+        function carregarNotas() {
+            const notas = JSON.parse(localStorage.getItem('notasFiscais')) || [];
+            tabela.innerHTML = '';
+
+            notas.forEach((nota, index) => {
+                const linha = tabela.insertRow();
+                linha.innerHTML = `
+                    <td>${nota.numeroNota}</td>
+                    <td>R$ ${nota.valorNota}</td>
+                    <td>${nota.dataEmissao}</td>
+                    <td>${nota.dataVencimento}</td>
+                    <td>${nota.tipoPagamento}</td>
+                    <td>${nota.statusPagamento}</td>
+                    <td>${nota.fornecedor}</td>
+                    <td>
+                        <button class="editar" data-index="${index}">Editar</button>
+                        <button class="excluir" data-index="${index}">Excluir</button>
+                    </td>
+                `;
+            });
+        }
+
+        tabela.addEventListener('click', function(event) {
+            const alvo = event.target;
+            const index = alvo.getAttribute('data-index');
+            let notas = JSON.parse(localStorage.getItem('notasFiscais')) || [];
+
+            if (alvo.classList.contains('excluir')) {
+                notas.splice(index, 1);
+                localStorage.setItem('notasFiscais', JSON.stringify(notas));
+                carregarNotas();
+            }
+
+            if (alvo.classList.contains('editar')) {
+                const nota = notas[index];
+                const numeroNota = prompt('Editar Número da Nota:', nota.numeroNota);
+                const valorNota = prompt('Editar Valor da Nota (R$):', nota.valorNota);
+                const dataEmissao = prompt('Editar Data de Emissão:', nota.dataEmissao);
+                const dataVencimento = prompt('Editar Data de Vencimento:', nota.dataVencimento);
+                const tipoPagamento = prompt('Editar Tipo de Pagamento:', nota.tipoPagamento);
+                const statusPagamento = prompt('Editar Status do Pagamento:', nota.statusPagamento);
+                const fornecedor = prompt('Editar Nome do Fornecedor:', nota.fornecedor);
+
+                if (numeroNota && valorNota && dataVencimento && tipoPagamento && statusPagamento && fornecedor) {
+                    notas[index] = { numeroNota, valorNota: parseFloat(valorNota).toFixed(2), dataEmissao, dataVencimento, tipoPagamento, statusPagamento, fornecedor };
+                    localStorage.setItem('notasFiscais', JSON.stringify(notas));
+                    carregarNotas();
+                }
+            }
+        });
+
+        window.onload = carregarNotas;
+    </script>
 
      <footer> Pimatec Solutions © 2024 - contato: (35) 9 8449-8664</footer>
 </body>

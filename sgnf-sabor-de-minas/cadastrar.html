@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style-home.css">
+    <title>Cadastrar | SGNF - Sabor de Minas</title>
+</head>
+
+<body>
+    <!--<header>Restaurante Sabor de Minas</header>-->
+     <nav class="dp-menu">
+        <ul>
+            <li><a href="entrar.html">Início</a></li>
+            
+            <li><a href="contas.html">Contas &#x25BE</a></li>
+                <ul>
+                    <li><a href="#">Registrar NF</a></li>
+                    <li><a href="#">Pagar NF</a></li>
+                    <li><a href="#">Consultar NF</a></li>
+                </ul>
+            
+            <li><a href="#">Contatos</a></li>
+            
+            <li><a href="#">Perfil</a></li>
+            
+            <li><a href="#">Notificações &#x25BE</a></li>
+        </ul>
+     </nav>
+
+     <h2 align="center">Cadastro de Notas Fiscais</h2>
+
+     <div id="form">
+    <form id="formulario">
+        <label for="numeroNota">Número da Nota:</label>
+        <input type="text" id="numeroNota" name="numeroNota" required><br><br>
+
+        <label for="valorNota">Valor da Nota:</label>
+        <input type="number" name="valorNota" id="valorNota" required><br><br>
+
+        <label for="dataEmissao">Data de Emissão:</label>
+        <input type="date" id="dataEmissao" name="dataEmissao" required><br><br>
+
+        <label for="dataVencimento">Data de Vencimento:</label>
+        <input type="date" id="dataVencimento" name="dataVencimento" required><br><br>
+
+        <label for="tipoPagamento">Tipo de Pagamento:</label>
+        <select id="tipoPagamento" name="tipoPagamento" required>
+            <option value="Boleto">Boleto</option>
+            <option value="Transferência">Transferência</option>
+            <option value="Cartão">Cartão</option>
+        </select><br><br>
+
+        <label for="statusPagamento">Status do Pagamento:</label>
+        <select id="statusPagamento" name="statusPagamento" required>
+            <option value="Pago">Pago</option>
+            <option value="Pendente">Pendente</option>
+            <option value="Atrasado">Atrasado</option>
+        </select><br><br>
+
+        <label for="fornecedor">Nome do Fornecedor:</label>
+        <input type="text" id="fornecedor" name="fornecedor" required>
+        <br><br>
+        <button type="submit">Adicionar Nota Fiscal</button>
+    </form>
+    </div>
+    <br><br>
+    <button id="lista">
+        <a href="contas.html">Ver Lista de Notas Fiscais</a>
+    </button>
+
+    <script>
+        const formulario = document.getElementById('formulario');
+
+        formulario.addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const notaFiscal = {
+                numeroNota: document.getElementById('numeroNota').value,
+                valorNota: parseFloat(document.getElementById('valorNota').value).toFixed(2),
+                dataEmissao: document.getElementById('dataEmissao').value,
+                dataVencimento: document.getElementById('dataVencimento').value,
+                tipoPagamento: document.getElementById('tipoPagamento').value,
+                statusPagamento: document.getElementById('statusPagamento').value,
+                fornecedor: document.getElementById('fornecedor').value
+            };
+
+            // Armazenar no localStorage
+            let notas = JSON.parse(localStorage.getItem('notasFiscais')) || [];
+            notas.push(notaFiscal);
+            localStorage.setItem('notasFiscais', JSON.stringify(notas));
+
+            formulario.reset();
+            alert('Nota Fiscal cadastrada com sucesso!');
+        });
+    </script>
+</body>
