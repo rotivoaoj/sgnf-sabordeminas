@@ -30,10 +30,6 @@
     background-color: #fff;
 }
 
-.dp-menu ul li:last-child{
-    float: right;
-}
-
 /*MENU DROPDown*/
 .dp-menu ul ul{
     display: none;
@@ -53,13 +49,14 @@
     display: block;
 }
 
-.dp-menu ul li:nth-child(4){
+.dp-menu ul li:last-child{
     float: right;
 }
 
 body{
     background-image: url(imagens/fundo-abstrato.jpg);
     background-size: cover;
+
 }
 
 footer{

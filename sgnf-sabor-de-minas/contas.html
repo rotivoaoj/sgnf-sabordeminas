@@ -14,18 +14,15 @@
         <ul>
             <li><a href="entrar.html">Início</a></li>
             
-            <li><a href="#">Contas &#x25BE</a></li>
-                <ul>
+            <li><a href="contas.html">Contas</a></li>
+               <!--<ul>
                     <li><a href="#">Registrar NF</a></li>
                     <li><a href="#">Pagar NF</a></li>
                     <li><a href="#">Consultar NF</a></li>
-                </ul>
+                </ul>-->
             
             <li><a href="#">Contatos</a></li>
             
-            <li><a href="#">Perfil</a></li>
-            
-            <li><a href="#">Notificações &#x25BE</a></li>
         </ul>
     </nav>
 
@@ -34,6 +31,10 @@
     </a>
         <h2>Lista de Notas Fiscais</h2>
         
+        <div id="popup" class="popup">
+            <p id="popupMensagem"></p>
+            <button onclick="fecharPopup()">Fechar</button>
+        </div>
 
         <table id="tabelaNotas">
             <thead>
@@ -55,6 +56,9 @@
 
      <script>
         const tabela = document.getElementById('tabelaNotas').getElementsByTagName('tbody')[0];
+        const popup = document.getElementById('popup');
+        const popupMensagem = document.getElementById('popupMensagem');
+
 
         function carregarNotas() {
             const notas = JSON.parse(localStorage.getItem('notasFiscais')) || [];
@@ -75,6 +79,9 @@
                         <button class="excluir" data-index="${index}">Excluir</button>
                     </td>
                 `;
+
+                verificarVencimentos();
+
             });
         }
 
@@ -107,8 +114,52 @@
             }
         });
 
+        function verificarVencimentos() {
+            notificacoes.innerHTML = '';
+            const notas = JSON.parse(localStorage.getItem('notasFiscais')) || [];
+            const hoje = new Date();
+
+            notas.forEach(nota => {
+                const dataVencimento = new Date(nota.dataVencimento);
+                const diferencaDias = Math.ceil((dataVencimento - hoje) / (1000 * 60 * 60 * 24));
+
+                if (diferencaDias >= 0 && diferencaDias <= 3) {
+                    const alerta = document.createElement('div');
+                    alerta.classList.add('notificacao');
+                    alerta.textContent = `A nota fiscal ${nota.numeroNota} do Fornecedor ${nota.fornecedor} vence em ${diferencaDias} dias!`;
+                    notificacoes.appendChild(alerta);
+                }
+            }
+        )};
+
+        function verificarVencimentos() {
+            const notas = JSON.parse(localStorage.getItem('notasFiscais')) || [];
+            const hoje = new Date();
+            let mensagens = [];
+
+            notas.forEach(nota => {
+                const dataVencimento = new Date(nota.dataVencimento);
+                const diferencaDias = Math.ceil((dataVencimento - hoje) / (1000 * 60 * 60 * 24));
+
+                if (diferencaDias >= 0 && diferencaDias <= 3) {
+                    mensagens.push(`A nota fiscal ${nota.numeroNota} do fornecedor ${nota.fornecedor} vence em ${diferencaDias} dias!`);
+                }
+            });
+
+            if (mensagens.length > 0) {
+                popupMensagem.innerHTML = mensagens.join('<br>');
+                popup.style.display = 'block';
+            }
+        }
+
+        function fecharPopup() {
+            popup.style.display = 'none';
+        }
+
         window.onload = carregarNotas;
     </script>
+
+    <a id="btn-top" href="#">&#x02191</a>
 
      <footer> Pimatec Solutions © 2024 - contato: (35) 9 8449-8664</footer>
 </body>
