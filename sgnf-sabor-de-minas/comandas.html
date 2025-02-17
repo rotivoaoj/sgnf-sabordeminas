@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comandas | Sabor de Minas</title>
+    <link rel="stylesheet" href="style-comandas.css">
+</head>
+
+<body>
+    <nav class="dp-menu">
+        <ul>
+            <li><a href="entrar.html">Início</a></li>
+            
+            <li><a href="contas.html">Contas</a></li>
+                <ul>
+                    <li><a href="#">Registrar NF</a></li>
+                    <li><a href="#">Pagar NF</a></li>
+                    <li><a href="#">Consultar NF</a></li>
+                </ul>
+            <li><a href="comandas.html">Comandas</a></li>
+            
+            <li><a href="cadastrar.html">Cadastrar</a></li>
+
+            <li><a href="contatos.html">Contatos</a></li>
+            
+            
+        </ul>
+     </nav>
+     
+     <h2>Cadastro de Comandas</h2>
+    <form id="formularioComandas">
+        <label for="numeroComanda">Nº Comanda:</label>
+            <input type="text" id="numeroComanda" name="numeroComanda" required>
+                <label for="quantidadeRefeicao">Qtd. Refeições:</label>
+                    <input type="number" id="quantidadeRefeicao" name="quantidadeRefeicao" required>
+
+        <label for="tipoRefeicao">Tipo:</label>
+            <select id="tipoRefeicao" name="tipoRefeicao" required>
+                <option value="Meia">Meia</option>
+                <option value="Inteira">Inteira</option>
+            </select>
+
+        <label for="bebidas">Bebidas:</label>
+            <input id="qtd" type="number" id="bebidas" name="quantidade" placeholder="QTD">
+                <select id="bebidas">
+                    <option value="Coca 600ML">COCA 600ML</option>
+            <option value="Coca KS">COCA KS</option>
+            <option value="Coca Lata">COCA LATA</option>
+            <option value="Coca 200ML">COCA 200ML</option>
+            <option value="Coca 1L">COCA 1L</option>
+            <option value="Coca 2L">COCA 2L</option>
+            <option value="----------">----------</option>
+            <option value="Guarana Ant 600ML">GUAR. ANT. 600ML</option>
+            <option value="Guarana Ant KS">GUAR. ANT. KS</option>
+            <option value="Guarana Ant Lata">GUAR. ANT. LATA</option>
+            <option value="Guarana Ant 200ML">GUAR. ANT. 200ML</option>
+            <option value="Guarana Ant 1L">GUAR. ANT. 1L</option>
+            <option value="Guarana Ant 2L">GUAR. ANT. 2L</option>
+            <option value="----------">----------</option>
+
+
+        </select>
+
+        <button type="submit">Adicionar Comanda</button>
+    </form>
+
+    <a href="contas.html">Ver Lista de Notas Fiscais e Comandas</a>
+
+
+    <script>
+        document.getElementById('formularioComandas').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const comanda = {
+                numeroComanda: document.getElementById('numeroComanda').value,
+                quantidadeRefeicao: document.getElementById('quantidadeRefeicao').value,
+                tipoRefeicao: document.getElementById('tipoRefeicao').value,
+                bebidas: document.getElementById('bebidas').value.split(',').map(b => b.trim())
+            };
+
+            let comandas = JSON.parse(localStorage.getItem('comandas')) || [];
+            comandas.push(comanda);
+            localStorage.setItem('comandas', JSON.stringify(comandas));
+
+            document.getElementById('formularioComandas').reset();
+            alert('Comanda cadastrada com sucesso!');
+        });
+    </script>
+
+     <footer> Pimatec Solutions © 2024</footer>
+</body>
+</html>

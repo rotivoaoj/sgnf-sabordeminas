@@ -133,7 +133,7 @@ button {
 }
 
 .excluir {
-    background-color: #ff9191;
+    background-color: #ff9898;
     border-radius: 10px;
     padding: 4px 4px;
     color: #ff2121;
@@ -149,7 +149,7 @@ button {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background-color: rgb(255, 107, 107);
+    background-color: rgb(255, 139, 139);
     padding: 20px;
     border: 1px solid #ff5353;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
@@ -164,8 +164,8 @@ button {
 }
 
 #btn-top{
-    background-color: #ff0000;
-    color: white;
+    background-color: #ff00006b;
+    color: rgba(255, 255, 255, 0.164);
     width: 40px;
     height: 40px;
     position: fixed;
@@ -179,4 +179,9 @@ button {
     font-size: 20px;
     font-weight:900;
     
+}
+
+#btn-top:hover {
+    background-color: #ff0000;
+    color: white;
 }
