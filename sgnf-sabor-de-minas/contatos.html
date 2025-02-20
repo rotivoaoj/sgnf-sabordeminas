@@ -3,30 +3,113 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style-contatos.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=person" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=edit" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=person_remove" />
     <title>Contatos | Sabor de Minas</title>
 </head>
-<body>
-    <nav class="dp-menu">
-        <ul>
-            <li><a href="entrar.html">Início</a></li>
-            
-            <li><a href="contas.html">Contas</a></li>
-                <ul>
-                    <li><a href="#">Registrar NF</a></li>
-                    <li><a href="#">Pagar NF</a></li>
-                    <li><a href="#">Consultar NF</a></li>
-                </ul>
-            <li><a href="comandas.html">Comandas</a></li>
-            
-            <li><a href="cadastrar.html">Cadastrar</a></li>
 
-            <li><a href="contatos.html">Contatos</a></li>
+    <body>
+        <nav class="dp-menu">
+            <ul>
+                <li><a href="entrar.html">Início</a></li>
             
+                <li><a href="contas.html">Contas</a></li>
+                    <ul>
+                        <li><a href="#">Registrar NF</a></li>
+                            <li><a href="#">Pagar NF</a></li>
+                                <li><a href="#">Consultar NF</a></li>
+                    </ul>
+                <li><a href="comandas.html">Comandas</a></li>
             
-        </ul>
-     </nav>  
+                <li><a href="cadastrar.html">Cadastrar</a></li>
 
+                <li><a href="contatos.html">Contatos</a></li>
+            </ul>
+     </nav>
 
-    
-</body>
+     <h2>Contatos dos Fornecedores</h2>
+
+     <div class="actions">
+        <button class="cadastrar" onclick="cadastrarFornecedor()">Cadastrar Fornecedor</button>
+        <!--<a href="cadastrar.html" class="voltar">Voltar para Cadastro</a>-->
+    </div>
+
+    <div class="container" id="listaFornecedores">
+        <!-- Cards serão carregados aqui -->
+    </div>
+
+    <script>
+        const lista = document.getElementById('listaFornecedores');
+
+        function carregarFornecedores() {
+            const fornecedores = JSON.parse(localStorage.getItem('fornecedores')) || [];
+            lista.innerHTML = '';
+
+            fornecedores.forEach((fornecedor, index) => {
+                const card = document.createElement('div');
+                card.className = 'card';
+                card.innerHTML = `
+                        <div class="info"><strong>Nome:</strong> ${fornecedor.nome}</div>
+                            <div class="info"><strong>Contato:</strong> ${fornecedor.contato}</div>
+                                <div class="info"><strong>Endereço:</strong> ${fornecedor.endereco}</div>
+                                    <div class="info"><strong>Empresa:</strong> ${fornecedor.empresa}</div>
+                                        <div class="buttons">
+                                    <button class="editar" data-index="${index}">Editar</button>
+                                    <button class="excluir" data-index="${index}">Excluir</button>
+                                        </div>
+                `;
+                lista.appendChild(card);
+            });
+        }
+
+        function cadastrarFornecedor() {
+            const nome = prompt('Nome do Fornecedor:');
+                const contato = prompt('Contato:');
+                    const endereco = prompt('Endereço:');
+                        const empresa = prompt('Empresa:');
+
+            if (nome && contato && endereco && empresa) {
+                const fornecedores = JSON.parse(localStorage.getItem('fornecedores')) || [];
+                    fornecedores.push({ nome, contato, endereco, empresa });
+                        localStorage.setItem('fornecedores', JSON.stringify(fornecedores));
+                            carregarFornecedores();
+            } else {
+                alert('Todos os campos são obrigatórios para cadastrar um fornecedor.');
+            }
+        }
+
+        lista.addEventListener('click', function(event) {
+            const alvo = event.target;
+            const index = alvo.getAttribute('data-index');
+            let fornecedores = JSON.parse(localStorage.getItem('fornecedores')) || [];
+
+            if (alvo.classList.contains('excluir')) {
+                if (confirm('Tem certeza que deseja excluir este fornecedor?')) {
+                    fornecedores.splice(index, 1);
+                    localStorage.setItem('fornecedores', JSON.stringify(fornecedores));
+                    carregarFornecedores();
+                }
+            }
+
+            if (alvo.classList.contains('editar')) {
+                const fornecedor = fornecedores[index];
+                const nome = prompt('Editar Nome:', fornecedor.nome) || fornecedor.nome;
+                const contato = prompt('Editar Contato:', fornecedor.contato) || fornecedor.contato;
+                const endereco = prompt('Editar Endereço:', fornecedor.endereco) || fornecedor.endereco;
+                const empresa = prompt('Editar Empresa:', fornecedor.empresa) || fornecedor.empresa;
+
+                fornecedores[index] = { nome, contato, endereco, empresa };
+                localStorage.setItem('fornecedores', JSON.stringify(fornecedores));
+                carregarFornecedores();
+            }
+        });
+
+        window.onload = carregarFornecedores;
+    </script>
+
+        <footer> Pimatec Solutions © 2024</footer>
+
+    </body>
 </html>

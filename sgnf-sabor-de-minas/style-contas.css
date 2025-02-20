@@ -72,7 +72,7 @@ footer{
     font-size: 10px;
     background-color: red;
     justify-content: center;
-    position:relative;
+    position:fixed;
     bottom: 0;
     width: 100%;
     color: #fff;
@@ -88,7 +88,8 @@ h2 {
     font-size: 20px;
     font-weight: normal;
     color: black;
-    padding: 10px;
+    margin-top: 10px;
+    margin-left: 15px;
 }
 
 table {
@@ -126,17 +127,17 @@ button {
 }
 
 .editar {
-    background-color: #9292d6;
+    background-color: #7fbaeb;
+    color: #0036c9;
     border-radius: 10px;
     padding: 4px 4px;
-    color: #312dff;
 }
 
 .excluir {
-    background-color: #ff9898;
+    background-color: #e48680;
+    color: #e20f00;
     border-radius: 10px;
     padding: 4px 4px;
-    color: #ff2121;
 }
 
 .cad {

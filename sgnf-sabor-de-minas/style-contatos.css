@@ -7,6 +7,11 @@
     font-family: 'Poppins', sans-serif;
 }
 
+body{
+    background-image: url(imagens/fundo-abstrato.jpg);
+    background-size: cover;
+}
+
 .dp-menu ul{
     list-style: none;
     padding: 0;
@@ -74,77 +79,105 @@ h2 {
     font-size: 20px;
     font-weight: normal;
     margin-left: 15px;
-    margin-top: 20px;
+    margin-top: 15px;
 }
 
-a {
-    display: block;
-    text-align: center;
-    text-decoration: none;
-    color: #fff;
+.actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
 }
-
-form {
-    max-width: 400px;
-    height: 530px;
-    margin: auto;
-    align-content: left;
-    background-color: #cecece;
-}
-
-label {
-    display: block;
-    width: 60%;
-    margin-bottom: 10px;
-    margin-left: 14%;
-    font-size: 16px;
-}
-
-input {
-    width: 300px;
-    border: none;
-    border-left: 2px solid black;
-    border-radius: 3px;
-    background-color: #ffffff00;
-    margin-left: 14%;
-    background-color: #ffffff;
-}
-
-select {
-    width: 150px;
-    border: none;
-    border-radius: 5px;
-    margin-left: 14%;
-}
-
-button {
-    margin-top: 20px;
-    padding: 5px 5px;
-    background-color: #bb0000;
-    color: white;
+.actions button, .actions a {
+    padding: 10px 15px;
     border: none;
     cursor: pointer;
-    display: block;
-    margin-left: 30%;
     border-radius: 5px;
+    text-decoration: none;
+    font-size: 14px;
 }
-
-#ver {
-    border-radius: 5px;
-    margin-top: 20px;
-    color: #bb0000;
-
-}
-
-button:hover {
-    background-color: #970000;
-}
-
-#back{
-    background-color: #bb0000;
+.cadastrar {
+    background-color: #ff0000;
     color: white;
-    padding: 5px 10px;
-    border-radius: 3px;
-    margin-left: 10px;
+    margin-left: 20px;
+    margin-top: 20px;
+    float: right;
+}
+
+.cadastrar:hover {
+    background-color: #a80000;
+    color: white;
+}
+
+.voltar {
+    background-color: #2196F3;
+    color: white;
+    margin-right: 20px;
+}
+
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: flex-start;
+}
+
+.card {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 7px rgba(0, 0, 0, 0.329);
+    padding: 10px;
+    width: 390px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
     position: relative;
+    margin-left: 30px;
+    font-size: 14px;
+    line-height: 12px;
+}
+
+.info {
+    margin-bottom: 10px;
+}
+
+.info strong {
+    display: inline-block;
+    width: 100px;
+}
+
+.buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.buttons button {
+    padding: 5px 10px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.editar {
+    background-color: #7fbaeb;
+    color: #0036c9;
+}
+
+.excluir {
+    background-color: #ff928b;
+    color: #e20f00;
+}
+
+img {
+    width: 50px;
+    height: 50px;
+}
+
+.contato {
+    font-size: 100px;
+    color: #000000;
+}
+
+.remove {
+    font-size: 8px;
 }
